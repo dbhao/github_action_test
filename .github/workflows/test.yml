@@ -1,18 +1,9 @@
 name: TEST-CI
 
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'Person to greet'
-        required: true
-        default: 'Mona the Octocat'
-      home:
-        description: 'location'
-        required: false
-        default: 'The Octoverse'
   schedule:
     - cron: '*/2 * * * *'
+  workflow_dispatch:
 
 jobs:
   printInputs:
@@ -20,6 +11,4 @@ jobs:
     steps:
     - run: |
         echo "Run something"
-        echo "Name: ${{ github.event.inputs.name }}"
-        echo "Home: ${{ github.event.inputs.home }}"
 
