@@ -6,12 +6,21 @@ on:
   schedule:
     - cron: '30 * * * *'
 
+env:
+  TAG_FILTER: "v4."
+
 jobs:
   printInputs:
     runs-on: ubuntu-latest
     steps:
     - run: |
         echo "Run something"
+
+  printEnv:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          export
 
   dump_contexts_to_log:
     runs-on: ubuntu-latest
