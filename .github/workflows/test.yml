@@ -38,3 +38,30 @@ jobs:
         run: echo '${{ toJSON(strategy) }}'
       - name: Dump matrix context
         run: echo '${{ toJSON(matrix) }}'
+
+  matrix_test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        parameter: [ setting_1, setting_2 ]
+        testsuite:
+          - name: suite1
+            dir: >-
+              subdir/suite1
+            target: test
+          - name: suite2
+            dir: "subdir/suite3 subdir/suite3/abc subdir/suite3_1"
+            target: test
+          - name: suite3
+            dir: subdir/suite3
+            target: test
+    steps:
+      - name: run tests
+        shell: bash
+        run: |
+          dirs="${{matrix.testsuite.dir}}"
+          dirArray=($dirs)
+          for dir in "${dirArray[@]}"; do
+            echo "${dir}"
+          done
