@@ -12,7 +12,7 @@ jobs:
 
   call-child:
     name: child
-    needs: [ start_pipeline ]
+    needs: [ start-parent ]
     uses: ./.github/workflows/child.yml
 
   finish-success:
