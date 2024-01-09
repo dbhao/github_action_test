@@ -15,12 +15,14 @@ jobs:
 
   write-env:
     runs-on: ubuntu-latest
+    needs: [ start-parent ]
     steps:
       - run: |
           echo 'cluster_id=hello' | tee -a $GITHUB_ENV
 
   read-env:
     runs-on: ubuntu-latest
+    needs: [ write-env ]
     steps:
       - run: |
           echo ${{ env.cluster_id }}
@@ -47,6 +49,7 @@ jobs:
     needs:
       - call-child
       - call-remote
+      - read-env
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps:
