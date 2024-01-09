@@ -10,6 +10,11 @@ jobs:
       - run: |
           echo "Run parent"
 
+  call-remote:
+    name: remote
+    needs: [ start-parent ]
+    uses: dbhao/github_action_test_2/.github/workflows/remote.yml@master
+
   call-child:
     name: child
     needs: [ start-parent ]
