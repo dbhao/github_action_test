@@ -3,12 +3,27 @@ name: TEST-PARENT
 on:
   workflow_dispatch:
 
+env:
+  cluster_id: ''
+
 jobs:
   start-parent:
     runs-on: ubuntu-latest
     steps:
       - run: |
           echo "Run parent"
+
+  write-env:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo 'cluster_id=hello' | tee -a $GITHUB_ENV
+
+  read-env:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo ${{ env.cluster_id }}
 
   call-remote:
     name: remote
