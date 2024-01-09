@@ -15,10 +15,18 @@ jobs:
     needs: [ start_pipeline ]
     uses: ./.github/workflows/child.yml
 
-  finish-parent:
+  finish-success:
     needs: [ call-child ]
     runs-on: ubuntu-latest
+    if: ${{ success() }}
     steps:
       - run: |
-          echo "Success: ", ${{ success() }}
-          echo "Failure: ", ${{ failure() }}
+          echo "Success"
+
+  finish-failure:
+    needs: [ call-child ]
+    runs-on: ubuntu-latest
+    if: ${{ failure() }}
+    steps:
+      - run: |
+          echo "Failure"
