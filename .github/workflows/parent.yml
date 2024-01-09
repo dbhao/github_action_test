@@ -29,7 +29,9 @@ jobs:
           echo "Success"
 
   finish-failure:
-    needs: [ call-child ]
+    needs:
+      - call-child
+      - call-remote
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps:
