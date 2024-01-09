@@ -26,7 +26,6 @@ jobs:
     steps:
       - run: |
           echo ${{ env.cluster_id }}
-          echo ${{ jobs.write-env.env.cluster_id }}
 
   call-remote:
     name: remote
